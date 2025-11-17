@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+#welcome {
+  background: url(https://images.creativefabrica.com/products/previews/2024/02/16/Wue5V4Qi2/2cRyuG9O3jkiMMvsOMyxJN9aZ6m-mobile.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 700px;
+}
+
+.name {
+  background: #fceabb;
+  background: linear-gradient(
+    to right,
+    #fceabb 0%,
+    #fccd4d 50%,
+    /* #f8b500 51%, */ #fbdf93 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav {
+  color: white;
+}
+.head {
+  background: #f0b7a1;
+  background: linear-gradient(
+    to right,
+    #f0b7a1 0%,
+    #8c3310 50%,
+    #752201 51%,
+    #bf6e4e 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rev {
+  background-image: linear-gradient(
+    to right,
+    #3ca55c 0%,
+    #b5ac49 51%,
+    #3ca55c 100%
+  );
+}
+.rev {
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.rev:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.serch {
+  background-image: linear-gradient(
+    to right,
+    #403b4a 0%,
+    #e7e9bb 51%,
+    #403b4a 100%
+  );
+}
+.serch {
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.serch:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+#auth {
+  background: url(https://t3.ftcdn.net/jpg/04/28/87/10/360_F_428871097_74QTIx9LRjJSBTnknjFlX2pSTRIL1edy.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 800px;
+}
+
+#review {
+  background: url(https://img.freepik.com/premium-photo/stars-are-scattered-green-background-with-white-star-generative-ai_955884-14533.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 500px;
+}
+
+#cat {
+  background: url(https://i.pinimg.com/originals/eb/47/ea/eb47ea2afbea77bfad28395881c9bb75.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 500px;
+  width: 100%;
+}
+.profile {
+  border-radius: 100px;
+}
+#card {
+  background: url(https://static.vecteezy.com/system/resources/previews/018/033/143/original/abstract-soft-yellow-watercolor-background-creative-yellow-clouds-and-white-shades-hand-drawn-texture-watercolor-paper-textured-aquarelle-canvas-for-modern-creative-design-wash-aqua-vector.jpg);
+}
+
+/* #help{
+  background: url(https://wallpaperaccess.com/full/3660193.jpg);
+   background-size: cover;
+  background-attachment: fixed;
+  height: 300px;
+} */
+@import "tailwindcss";
