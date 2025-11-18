@@ -138,7 +138,7 @@ console.log(profileData);
                   )}
                 </label>
               </div>
-              <div className="p-2 ms-7">
+              <div className="p-2 mx-10 ">
                 <input
                   onChange={(e) =>
                     setProfileData({ ...profileData, userName: e.target.value })

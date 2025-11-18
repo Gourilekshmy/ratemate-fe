@@ -44,14 +44,14 @@ const AllReviews = () => {
     <>
       <Header />
       {isLoggedin ? (
-        <div className="pt-25">
+        <div id="Allrev" className="pt-25">
           <h1 className="text-3xl text-center text-green-600 font-bold">
             Reviews
           </h1>
           {review?.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-3 lg:mx-20 my-8 mx-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3  lg:mx-20 my-8 mx-10">
               {review?.map((eachReview) => (
-                <div className="shadow-xl/30 bg-linear-to-bl from-gray-300 to-white rounded-2xl w-100 p-5 my-5 py-5 ">
+                <div className="shadow-xl/30 bg-gradient-to-b from-white to-amber-100 rounded-2xl w-100 p-5 my-5 py-5 ">
                   <div>
                     <div></div>
                     <div className="flex gap-5">
