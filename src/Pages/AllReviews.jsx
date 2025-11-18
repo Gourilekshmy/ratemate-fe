@@ -51,7 +51,7 @@ const AllReviews = () => {
           {review?.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-3  lg:mx-20 my-8 mx-10">
               {review?.map((eachReview) => (
-                <div className="shadow-xl/30 bg-gradient-to-b from-white to-amber-100 rounded-2xl w-100 p-5 my-5 py-5 ">
+                <div className="shadow-xl/30 bg-gradient from-white to-amber-200 rounded-2xl w-100 p-5 my-5 py-5 ">
                   <div>
                     <div></div>
                     <div className="flex gap-5">
