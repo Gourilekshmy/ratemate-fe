@@ -132,7 +132,7 @@ const Categories = () => {
                 {" "}
                 <div className="grid  grid-cols-1  lg:grid-cols-3 gap-4 mx-50 mt-20 ">
                   {review?.map((eachReview) => (
-                    <div className="shadow-xl/30 bg-linear-to-bl from-gray-300 to-white rounded-2xl w-70 p-5 pb-10 my-5 text-center">
+                    <div className="shadow-xl/30 bg-linear-to-bl from-white to-lime-300 rounded-2xl w-70 p-5 pb-10 my-5 text-center">
                       <div className="grid grid-cols-3">
                         <div></div>
                         <div>

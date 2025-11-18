@@ -275,7 +275,7 @@ const Reviewpage = () => {
         <div>
           <div className="grid grid-cols-1 lg:grid-cols-3 lg:mx-20 my-8 mx-10">
             {reviews?.map((eachReview) => (
-              <div className="shadow-xl/30 bg-linear-to-bl from-gray-300 to-white rounded-2xl w-100 p-5 my-5 py-5 ">
+              <div id="card" className="shadow-xl/30 rounded-2xl w-100 p-5 my-5 py-5 ">
                 <div>
                   <div></div>
                   <div className="flex gap-5">
