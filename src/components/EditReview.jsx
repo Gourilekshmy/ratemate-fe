@@ -7,38 +7,46 @@ import {
   ModalHeader,
 } from "flowbite-react";
 import { useState } from "react";
-import { updateReview } from "../services/AllApi";
+import { getReviews, getSingleReview, updateReview } from "../services/AllApi";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 
 const EditReview = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [reviewDetails, setReviewDetails] = useState({});
+  const [reviewDetails, setReviewDetails] = useState({
+    company: "",
+    category: "",
+    imageUrl: "",
+    productName: "",
+    price: "",
+    comment: "",
+  });
 
   let { id } = useParams();
+  console.log(id)
 
-//   useEffect(() => {
-//     handleEdit();
-//   }, []);
+  // useEffect(() => {
+  //   handleEdit();
+  // }, []);
+
+  const getReview = async () => {
+      let token = localStorage.getItem("token");
+  
+      let reqheader = { Authorization: `Bearer ${token}` };
+      let apiResponse = await getSingleReview(id, reqheader);
+      console.log(apiResponse)
+      setReviewDetails(apiResponse.data);
+    };
 
   const handleEdit = async () => {
     let token = localStorage.getItem("token");
     let reqheader = { Authorization: `Bearer ${token}` };
 
-    let { company, category, imageUrl, productName, price, comment } =
-      reviewDetails;
-
     try {
-      let apiResponse = await updateReview(
-        id,
-        { company, category, imageUrl, productName, price, comment },
-        reqheader
-      );
-      let data = apiResponse.data;
-      setReviewDetails(data);
-      console.log(data);
+      await updateReview(id, reviewDetails, reqheader);
       alert("Successfully Updated");
+      setOpenModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +55,12 @@ const EditReview = () => {
   return (
     <>
       <div>
-        <button onClick={() => setOpenModal(true)}>
+        <button
+          onClick={() => {
+            getReview();
+            setOpenModal(true);
+          }}
+        >
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
         <Modal
@@ -67,30 +80,54 @@ const EditReview = () => {
                     category: e.target.value,
                   })
                 }
-                // value={reviewDetails.category}
+                value={reviewDetails.category}
                 className="w-full p-2 rounded border"
                 type="text"
                 placeholder="Edit Category "
               />
               <input
-                // value={reviewDetails.company}
+                onChange={(e) =>
+                  setReviewDetails({
+                    ...reviewDetails,
+                    company: e.target.value,
+                  })
+                }
+                value={reviewDetails.company}
                 className="w-full p-2 rounded border"
                 type="text"
                 placeholder="Edit Company Name"
               />
               <input
-                // value={reviewDetails.productName}
+                onChange={(e) =>
+                  setReviewDetails({
+                    ...reviewDetails,
+                    productName: e.target.value,
+                  })
+                }
+                value={reviewDetails.productName}
                 className="w-full p-2 rounded border"
                 type="text"
                 placeholder="Edit Product Name"
               />
               <input
-                // value={reviewDetails.price}
+                onChange={(e) =>
+                  setReviewDetails({
+                    ...reviewDetails,
+                    price: e.target.value,
+                  })
+                }
+                value={reviewDetails.price}
                 className="w-full p-2 rounded border"
                 type="text"
                 placeholder="Price"
               />
               <input
+                onChange={(e) =>
+                  setReviewDetails({
+                    ...reviewDetails,
+                    imageUrl: e.target.value,
+                  })
+                }
                 value={reviewDetails.imageUrl}
                 className="w-full p-2 rounded border"
                 type="text"

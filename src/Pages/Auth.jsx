@@ -58,40 +58,17 @@ const Auth = ({ insideRegister }) => {
     }
   };
 
-  const handleGAuthDecode = async (googleToken) => {
-    const decoded = jwtDecode(googleToken);
-    console.log(decoded);
-
-    let reqbody = {
-      userName: decoded.name,
-      email: decoded.email,
-      profile: decoded.picture,
-    };
-
-    let apiResponse = await googleLogin(reqbody);
-    if (apiResponse.status == 200 || apiResponse.status == 201) {
-      localStorage.setItem("token", apiResponse.data.token);
-      localStorage.setItem("user", JSON.stringify(apiResponse.data.user));
-      navigate("/");
-    } else {
-      toast(apiResponse.response.data.message);
-    }
-  };
-
   return (
     <>
       <div className="bg-green-800 fixed w-full flex justify-between items-center px-4 lg:px-12 py-2 z-50">
         {/* Logo Section */}
         <div className="flex items-center gap-2">
           <img
-            className="w-16 sm:w-20"
-            style={{ marginTop: "-10px" }}
+            className="w-16"
             src="./src/assets/golden-star_259293-2443-removebg-preview.png"
-            alt="logo"
+            alt="RateMate Logo"
           />
-          <h2 className="name text-2xl sm:text-3xl font-bold text-white">
-            RateMate
-          </h2>
+          <h2 className="name text-2xl  font-bold ">RateMate</h2>
         </div>
 
         {/* Hamburger Icon (Mobile) */}
@@ -108,7 +85,7 @@ const Auth = ({ insideRegister }) => {
             isOpen ? "flex" : "hidden"
           } lg:flex flex-col lg:flex-row gap-5 items-center absolute lg:static top-16 left-0 w-full lg:w-auto bg-green-800 lg:bg-transparent px-6 py-4 lg:p-0`}
         >
-          <ul className="flex flex-col lg:flex-row gap-6 lg:gap-10 text-white text-lg">
+          <ul className="flex flex-col lg:flex-row gap-6 lg:gap-10 text-white">
             <li>
               <Link to={"/review"} onClick={() => setIsOpen(false)}>
                 Write a Review
@@ -134,7 +111,7 @@ const Auth = ({ insideRegister }) => {
             Help
           </Link>
 
-          <div className="mt-2 lg:mt-0">
+          {!insideRegister?<div className="mt-2 lg:mt-0">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse);
@@ -144,7 +121,7 @@ const Auth = ({ insideRegister }) => {
                 console.log("Login Failed");
               }}
             />
-          </div>
+          </div>:<div className="me-10"></div>}
         </div>
       </div>
 

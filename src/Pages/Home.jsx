@@ -7,11 +7,18 @@ import { getHomeReviews } from "../services/AllApi";
 
 const Home = () => {
   const [reviewData, setReviewData] = useState([]);
+  const[isLoggedin,setIsLoggedin]=useState(false)
 
   useEffect(() => {
     loadReviews();
   }, []);
 
+  useEffect(()=>{
+    let token=localStorage.getItem('token')
+    if (token) {
+      setIsLoggedin(true)
+    }
+  })
   const loadReviews = async () => {
     let apiResponse = await getHomeReviews();
     let data = apiResponse.data;
@@ -116,9 +123,11 @@ const Home = () => {
               <h2 className="mb-5">
                 “{eachReview.comment}”
               </h2>
-              <Link to={"/login"} className="font-bold  text-green-500">
+             {isLoggedin? <Link to={"/view-review"} className="font-bold  text-green-500">
                 Click here to know More About this Review
-              </Link>
+              </Link>: <Link to={"/login"} className="font-bold  text-green-500">
+                Click here to know More About this Review
+              </Link>}
             </div>))}
             <div></div>
           </div>

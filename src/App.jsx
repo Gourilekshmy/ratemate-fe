@@ -26,7 +26,7 @@ function App() {
       <Route path="/review" element={<Reviewpage/>}/>
       <Route path='/allReview' element={<AllReviews/>}/>
       <Route path='/view-review/:id' element={<ViewReview/>}/>
-      <Route path='/editReview' element={<EditReview/>}/>
+      <Route path='/editReview/:id' element={<EditReview/>}/>
       <Route path="/login" element={<Auth/>} />
       <Route path="/register" element={<Auth insideRegister={true}/>} />
       <Route path='/categories' element={<Categories/>}/>
