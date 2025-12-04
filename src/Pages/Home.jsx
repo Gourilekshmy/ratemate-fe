@@ -131,8 +131,7 @@ const Home = () => {
             </div>))}
             <div></div>
           </div>
-        ) : (
-          <h1>No Reviews Found</h1>
+        ) : (""
         )}
         <div className="grid grid-cols-2 gap-5 mt-30 mx-20 ">
           <div>

@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import {
   createReview,
   deleteReviews,
+  getCategories,
   getUserReviews,
 } from "../services/AllApi";
 import EditProfile from "../components/EditProfile";
@@ -18,7 +19,7 @@ const Profile = () => {
   const [preview, setPreview] = useState("");
 
   const [previewList, setPreviewlist] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState([]);
   const [newCategory, setNewCategory] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [userReviews, setUserReviews] = useState([]);
@@ -121,12 +122,11 @@ const Profile = () => {
             reqbody.append("ReviewPictures", eachImage);
           });
         }
-        
       }
 
       let apiResponse = await createReview(reqbody, header);
       console.log(apiResponse);
-      alert("Successfully Reviewed")
+      alert("Successfully Reviewed");
     }
   };
 
@@ -139,24 +139,57 @@ const Profile = () => {
   };
 
   useEffect(() => {
-  const saved = JSON.parse(localStorage.getItem("categories")) || [];
-  setCategories(saved);
-}, []);
+    const saved = JSON.parse(localStorage.getItem("categories")) || [];
+    setCategory(saved);
+    getAllCategories();
+  }, []);
 
   const addCategory = () => {
     if (categoryName == "") {
       setReviewData({ ...reviewData, category: "" });
       setNewCategory(false);
+      return;
     }
-    if (categories.includes(categoryName)) {
+    if (category.includes(categoryName)) {
       alert("Category already exists!");
       return;
-    } const updated = [...categories, categoryName];
+    }
+    const updated = [...category, categoryName];
 
-  setCategories(updated);
-  localStorage.setItem("categories", JSON.stringify(updated));
+    setCategory(updated);
+    localStorage.setItem("categories", JSON.stringify(updated));
     setCategoryName(""); // clear input
     setNewCategory(false);
+  };
+
+  const getAllCategories = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const reqheader = { Authorization: `Bearer ${token}` };
+
+      const apiResponse = await getCategories(reqheader);
+      const data = apiResponse.data;
+
+      let categories = [];
+
+      data.forEach((eachReview) => {
+        if (eachReview.category && !categories.includes(eachReview.category)) {
+          categories.push(eachReview.category);
+        }
+      });
+      const savedLocal = JSON.parse(localStorage.getItem("categories")) || [];
+
+      const allCategories = [...savedLocal];
+      categories.forEach((item) => {
+        if (!allCategories.includes(item)) {
+          allCategories.push(item);
+        }
+      });
+
+      setCategory(allCategories);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const loadUserReviews = async () => {
@@ -214,13 +247,13 @@ const Profile = () => {
         <div className="flex justify-center rounded-2xl gap-5">
           <button
             onClick={() => SetShowReviews(true)}
-            className="text-xl border p-2 cursor-pointer"
+            className="text-xl focus:border-green-700 hover:text-green-700 focus:text-white focus:bg-green-600 border rounded-2xl p-2 cursor-pointer"
           >
             Post Review
           </button>
           <button
             onClick={() => SetShowReviews(false)}
-            className="text-xl border p-2 cursor-pointer"
+            className="text-xl border focus:border-green-700 hover:text-green-700 focus:text-white focus:bg-green-600 rounded-2xl p-2 cursor-pointer"
           >
             My Reviews
           </button>
@@ -260,7 +293,7 @@ const Profile = () => {
                       <option className="font-bold" value="">
                         Choose Any
                       </option>
-                      {categories?.map((cat, i) => (
+                      {category?.map((cat, i) => (
                         <option className="font-bold" key={i} value={cat}>
                           {cat}
                         </option>
@@ -454,8 +487,11 @@ const Profile = () => {
                       <button
                         onClick={() => onDeleteClick(eachReview._id)}
                         className=" text-red-500 "
-                      > <FontAwesomeIcon icon={faTrash} />
-                      </button></div>
+                      >
+                        {" "}
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
                   </div>
                   <hr />
                   <h1 className="my-3">
