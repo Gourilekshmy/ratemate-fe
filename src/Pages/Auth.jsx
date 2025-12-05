@@ -23,6 +23,7 @@ const Auth = ({ insideRegister }) => {
       let apiResponse = await createUser(formData);
       if (apiResponse.status == 201) {
         toast("Successfully Registered!");
+        navigate("/login");
       } else {
         toast(apiResponse.response.data.message);
       }
@@ -51,6 +52,8 @@ const Auth = ({ insideRegister }) => {
           //navigate to home
           navigate("/");
         }
+      } else {
+        alert(apiResponse.response.data.message);
       }
       console.log(apiResponse);
     } catch (error) {
@@ -111,17 +114,21 @@ const Auth = ({ insideRegister }) => {
             Help
           </Link>
 
-          {!insideRegister?<div className="mt-2 lg:mt-0">
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                console.log(credentialResponse);
-                handleGAuthDecode(credentialResponse.credential);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
-          </div>:<div className="me-10"></div>}
+          {!insideRegister ? (
+            <div className="mt-2 lg:mt-0">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                  handleGAuthDecode(credentialResponse.credential);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
+          ) : (
+            <div className="me-10"></div>
+          )}
         </div>
       </div>
 
@@ -170,21 +177,25 @@ const Auth = ({ insideRegister }) => {
             />
           </div>
           {insideRegister ? (
-            <button
+           <div> <button
               onClick={registerUser}
               className="rounded-xl text-white font-bold p-2 bg-green-500 mt-6"
               style={{ width: "320px" }}
             >
               Register
             </button>
+            <ToastContainer/></div>
           ) : (
-            <button
-              onClick={login}
-              className="rounded-xl p-2 font-bold text-white bg-green-500 mt-6"
-              style={{ width: "320px" }}
-            >
-              LogIn
-            </button>
+            <div>
+              <button
+                onClick={login}
+                className="rounded-xl p-2 font-bold text-white bg-green-500 mt-6"
+                style={{ width: "320px" }}
+              >
+                LogIn
+              </button>
+              <ToastContainer />
+            </div>
           )}
           {insideRegister ? (
             <h1 className="text-center mt-10 text-xl text-gray-400">

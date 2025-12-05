@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import EditReview from "../components/EditReview";
+import { toast, ToastContainer } from "react-toastify";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -126,7 +127,7 @@ const Profile = () => {
 
       let apiResponse = await createReview(reqbody, header);
       console.log(apiResponse);
-      alert("Successfully Reviewed");
+      toast("Successfully Reviewed");
     }
   };
 
@@ -450,12 +451,14 @@ const Profile = () => {
               </div>
               <div className="grid grid-cols-3">
                 <div></div>
-                <button
+               <div> <button
                   onClick={handleSubmit}
                   className="rounded bg-green-600 text-white font-bold p-3 lg:mx-20"
                 >
                   Submit
                 </button>
+                <ToastContainer/>
+                </div>
               </div>
             </div>
           </div>
