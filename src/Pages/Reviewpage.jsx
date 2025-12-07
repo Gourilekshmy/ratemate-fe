@@ -274,7 +274,7 @@ const Reviewpage = () => {
       ) : (
         <div>
           <div className="grid grid-cols-1 lg:grid-cols-3 lg:mx-20 my-8 mx-10">
-            {reviews?.map((eachReview) => (
+            {reviews?reviews.map((eachReview) => (
               <div id="card" className="shadow-xl/30 rounded-2xl w-100 p-5 my-5 py-5 ">
                 <div>
                   <div></div>
@@ -319,7 +319,19 @@ const Reviewpage = () => {
                   Know More
                 </Link>
               </div>
-            ))}
+            )):<div> <div className="text-center mt-15 mb-10">
+          <h1 className="text-2xl">Can't Find a Company ?</h1>
+          <h2 className="text-xl my-3">
+            It might not be listed on RateMate yet. Add it and be the first to
+            write a review.
+          </h2>
+          <Link
+            to={"/profile"}
+            className="text-green-600 p-2 bg-white border rounded-4xl "
+          >
+            Add Company
+          </Link>
+        </div></div>}
           </div>
         </div>
       )}

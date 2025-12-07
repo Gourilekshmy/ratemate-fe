@@ -15,6 +15,7 @@ import ViewReview from "./Pages/ViewReview";
 import AdminReviews from "./admin/AdminReviews";
 import EditReview from "./components/EditReview";
 import AdminSettings from "./admin/AdminSettings";
+import { AdminUser } from "./admin/AdminUser";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/admin-home" element={<AdminHome />} />
         <Route path="/admin-review" element={<AdminReviews />} />
+        <Route path="/admin-user" element={<AdminUser />} />
+
         <Route path="/admin-settings" element={<AdminSettings />} />
 
         <Route path="/profile" element={<Profile />} />
